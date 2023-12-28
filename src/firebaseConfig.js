@@ -26,7 +26,7 @@ export const auth = getAuth(app);
 
 
 // what product should look like
-// {
+// const data = {
 //   title: "Motion Haven Kids Sportswear",
 //   images: ["image1.jpg", "image2.jpg", "image3.jpg"],
 //   description: "Discover vibrant and stylish sportswear for kids at Motion Haven...",
@@ -34,12 +34,12 @@ export const auth = getAuth(app);
 //   discount: true,
 //   discountedPrice: 39.99,
 //   inStock: true,
-//   sizesAviable: [xs , s , m , l , xl , xxl ]
+//   sizesAviable: [xs , s , m , l , xl , xxl ],
 //   availability: "Ships in 1-2 business days",
 //   collors: ["Blue", "Red", "Green"],
 //   selectedVariant: "Blue",
 //   quantity: 1,
-//   review: 9
+//   review: 9,
 //   category: "Kids Sportswear",
 //   sizeGuide: "Check our size guide for the perfect fit.",
 //   faqs: [
