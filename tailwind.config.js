@@ -4,15 +4,15 @@ module.exports = {
     themes: [
       {
         mytheme: {
-          "primary": "#a700ff",
-          "secondary": "#0089e9",
-          "accent": "#6061ff",
-          "neutral": "#080d05",
-          "base-100": "#0d3242",
-          "info": "#00ecff",
-          "success": "#00a260",
-          "warning": "#ff7800",
-          "error": "#e54152",
+          "primary": "#3b82f6",
+          "secondary": "#a3e635",
+          "accent": "#d946ef",
+          "neutral": "#4b5563",
+          "base-100": "#fffff8",
+          "info": "#40daff",
+          "success": "#00f370",
+          "warning": "#1c1917",
+          "error": "#e11d48",
         },
       },
     ],
@@ -21,7 +21,14 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        'luckycoin': ['luckycoin', 'sans-serif'],
+        'kanit': ['kanit', 'sans-serif'],
+        'kanit-bold': ['kanit-bold', 'sans-serif'],
+        'kanit-light': ['kanit-light', 'sans-serif'],
+      },
+    },
   },
   plugins: [require("daisyui")],
 }

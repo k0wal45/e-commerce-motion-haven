@@ -6,12 +6,15 @@ import Admin from "./pages/Admin";
 import Checkout from "./pages/Checkout";
 import Product from "./pages/Product";
 import Notfound from "./pages/Notfound";
+import Navbar from "./components/navbar/Navbar";
+import Footer from "./components/Footer";
 
 
 function App() {
 
   return (
     <Router>
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home/>}/>
         <Route path="/category/:catId" element={<Category/>}/>
@@ -22,6 +25,7 @@ function App() {
         <Route path="/notfound" element={<Notfound/>}/>
         <Route path="/*" element={<Notfound/>}/>
       </Routes>
+      <Footer />
     </Router>
   )
 }

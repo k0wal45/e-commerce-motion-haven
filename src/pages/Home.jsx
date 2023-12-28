@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { db } from "../db";
+import { db } from "../firebaseConfig";
 import { collection, getDocs } from "firebase/firestore"; 
+import Hero from "../components/navbar/Hero";
 
 function Home() {
 
@@ -20,7 +21,6 @@ function Home() {
       
       setListings(response)
       setLoading(false)
-      console.log(response)
       
       
     }
@@ -28,27 +28,15 @@ function Home() {
     fetchListings()
   }, [])
 
+  if (!loading) {
+    console.log(listings)
+  }
+
   return !loading
     ? (
-      <div>
-        {
-          listings.map((doc) => (
-            <li>
-              {doc.test}
-              {
-                doc.faq
-                  ? doc.faq.map((item) => (
-                    <ul className="p-4 ">
-                      <li>{item.question}</li>
-                      <li>{item.answer}</li>
-                    </ul>
-                  ))
-                  : ''
-              }
-            </li>
-          ))
-        }
-      </div>
+      <main className='w-screen overflow-x-hidden'>
+        <Hero />
+      </main>
     )
     : (
       <div>
