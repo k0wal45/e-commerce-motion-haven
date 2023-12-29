@@ -3,6 +3,8 @@ import { db } from "../firebaseConfig";
 import { collection, getDocs } from "firebase/firestore"; 
 import Hero from "../components/Hero";
 import Loading from "./Loading";
+import Latest from "../components/Latest";
+import Decoration from "../components/Decoration";
 
 function Home() {
 
@@ -27,40 +29,28 @@ function Home() {
     fetchListings()
   }, [])
 
-  function countProductsByCategory(products) {
-    const categoryCount = {};
+  function getLatestItems(array) {
+    // Sort the array by date in descending order
+    const sortedArray = array.sort((a, b) => b.response.timeAdded - a.response.timeAdded);
   
-    products.forEach((product) => {
-      const category = product.response.category;
+    // Take the first 8 items (latest items)
+    const latestItems = sortedArray.slice(0, 8);
   
-      if (categoryCount[category]) {
-        categoryCount[category]++;
-      } else {
-        categoryCount[category] = 1;
-      }
-    });
-  
-    const result = Object.keys(categoryCount).map((category) => ({
-      category,
-      count: categoryCount[category],
-    }));
-  
-    return result;
+    return latestItems;
   }
 
-  if (!loading) {
-    // console.log(listings)
-    const categoryCounts = countProductsByCategory(listings);
-    // console.log(categoryCounts);
 
+  if (!loading) {
+
+    console.log(listings)
+    
     return  (
       <main className='w-screen overflow-x-hidden'>
         <Hero />
-        <ul>
-          {categoryCounts.map((item) => (
-            <li>{item.category} {item.count}</li>
-          ))}
-        </ul>
+        <Latest 
+          products={getLatestItems(listings)}
+        />
+        <Decoration />
       </main>
     )
   } 

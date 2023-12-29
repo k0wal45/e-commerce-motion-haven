@@ -29,3 +29,27 @@ body, html {
 	}
 
 }
+
+.animate-move {
+	animation: move 12s ease-in-out infinite;
+}
+
+@keyframes move {
+	0% {
+		transform: translate(0);
+
+	}
+
+	50% {
+		transform: translate(calc(-100% + 100vw));
+
+	}
+
+	100% {
+		transform: translate(0);
+
+	}
+	
+
+	
+}
