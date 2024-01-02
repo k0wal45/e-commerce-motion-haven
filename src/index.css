@@ -31,7 +31,7 @@ body, html {
 }
 
 .animate-move {
-	animation: move 12s ease-in-out infinite;
+	animation: move 120s ease-in-out infinite;
 }
 
 @keyframes move {
