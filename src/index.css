@@ -37,19 +37,35 @@ body, html {
 @keyframes move {
 	0% {
 		transform: translate(0);
-
 	}
-
 	50% {
 		transform: translate(calc(-100% + 100vw));
-
 	}
-
 	100% {
 		transform: translate(0);
-
 	}
-	
 
-	
+}
+
+/* scrollbar */
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  @apply bg-primary;
+  border-radius: 3px
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #aaa;
 }

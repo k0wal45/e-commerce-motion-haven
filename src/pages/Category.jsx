@@ -121,6 +121,7 @@ const Category = () => {
                   discount={item.response.discount}
                   discountedPrice={item.response.discountedPrice}
                   id={item.id}
+                  inStock={item.response.inStock}
                   />
                 ))
               : navigate('/')

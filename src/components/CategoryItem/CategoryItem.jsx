@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom'
 import './CategoryItem.css'
 
-const CategoryItem = ({image, title, price, discount, discountedPrice, id}) => {
+const CategoryItem = ({image, title, price, discount, discountedPrice, id, inStock}) => {
   return (
-    <Link to={`/product/${id}`} className=" relative w-72 h-[31rem] rounded-xl border-2 border-neutral-200 hover:border-neutral-200 flex flex-col overflow-hidden">
+    <Link to={`/product/${id}`} className={`${inStock ? '' : 'opacity-70'} relative w-72 h-[31rem] rounded-xl border-2 border-neutral-200 hover:border-neutral-200 flex flex-col overflow-hidden`}>
       {
         discount ? <span className="discount font-luckycoin bg-red-600">Discount</span> : ''
       }

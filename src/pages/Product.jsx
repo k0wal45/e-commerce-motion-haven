@@ -7,20 +7,20 @@ import Loading from './Loading'
 const Product = () => {
 
   const { prodId } = useParams()
-  const [listings, setListings] = useState([])
+  const [listing, setListing] = useState([])
   const [loading, setLoading] = useState(true)
   const [imageNow, setImageNow] = useState(0)
   const navigate = useNavigate()
 
 
-    // await fetch listings
+    // await fetch listing
     useEffect(() => {
 
-      const fetchListings = async () => {
+      const fetchListing = async () => {
         const docRef = doc(db, "products", prodId);
         const docSnap = await getDoc(docRef);
 
-        setListings({
+        setListing({
           id: docSnap.id,
           response: docSnap.data()
         })
@@ -35,26 +35,85 @@ const Product = () => {
 
       }
   
-      fetchListings()
-    }, [prodId])
+      fetchListing()
+    }, [prodId, navigate])
 
   if (!loading) {
-    console.log(listings);
+    console.log(listing);
+
+    const returnRating = (rating) => {
+      let stars = []
+      for (let i = 1; i < 11; i++) {
+        if(rating === i) {
+          stars.push(<input disabled type="radio" name="rating-10" className="bg-primary mask mask-star-2 odd:mask-half-1 even:mask-half-2" checked/>)
+        } else {
+          stars.push(<input disabled type="radio" name="rating-10" className="bg-primary mask mask-star-2 odd:mask-half-1 even:mask-half-2" />)
+        }
+        
+      }
+
+      return stars
+    }
+
+    
 
     return (
       <main className='w-screen overflow-x-hidden'>
-        <section className="flex flex-col gap-8 py-12 p-4 lg:p-12 lg:max-w-[50%]">
-          <div className="flex flex-col">
-            <img src={listings.response.images[imageNow]} alt={listings.response.title} className="aspect-square min-w-1/3 border-2 border-neutral-500" />
+        <section className="flex flex-col lg:flex-row gap-8 py-12 p-4 lg:p-12 justify-center items-center lg:max-w-[66vw] mx-auto">
+          <div className="flex flex-col gap-4 items-end min-w-[50%]">
+            <img src={listing.response.images[imageNow]} alt={listing.response.title} className="aspect-square max-h-[60vh] w-min border-2 border-neutral-500" />
+            <div className="flex gap-4 overflow-x-scroll">
+              {
+                listing.response.images.map((img, index) => (
+                  <img src={img} alt={listing.response.title} className={`aspect-square w-24 border-2 border-neutral-500 ${imageNow === index ? '' : 'opacity-50'}`} onClick={() => {setImageNow(index)}}/>
+                ))
+              }
+            </div>
           </div>
-          <div className="flex gap-4 items-center jutify-start">
+
+          <div className="flex flex-col items-start justify-center gap-8">
+
+            <h4 className="text-3xl font-bold">{listing.response.title}</h4>
+
+            <div className="flex gap-4 justify-center items-center">
+              <div className="rating rating-mmd rating-half">
+                {returnRating(listing.response.review)}
+              </div>
+              <p className='text-xl opacity-50'>({listing.response.review * 0.5})</p>
+              <div className="badge badge-primary badge-lg text-white">{listing.response.category}</div>
+            </div>
+            
+            <p>{listing.response.description}</p>
             {
-              listings.response.images.map((img, index) => (
-                <img src={img} alt={listings.response.title} className={`aspect-square w-24 border-2 border-neutral-500 ${imageNow === index ? '' : 'opacity-50'}`} onClick={() => {setImageNow(index)}}/>
-              ))
+              listing.response.discount 
+              ? <div className="flex gap-8 items-center justify-center">
+                  <p className="text-4xl font-bold text-red-600">{listing.response.discountedPrice}$</p>
+
+                  <div className="relative">
+                    <p className="text-3xl text-neutral-400">{listing.response.price}$</p>
+                    <div className="absolute top-[2px] left-0 w-full h-[2px] bg-neutral-400 origin-top-left rotate-[20deg]"></div>
+                  </div>
+              </div>
+
+              : <p className="text-4xl font-bold">{listing.response.price}$</p>
             }
+            <p className="text-xl opacity-60">{listing.response.availability}</p>
+
+            <div className="flex flex-col gap-2">
+              <p className="text-2xl font-bold">Size</p>
+              <ul className="flex gap-4 items-center justify-start">
+                {
+                  listing.response.sizesAvailable.map((size) => (
+                    <li className="p-[4px] px-[8px] border-[1px] border-neutral-400 rounded-md">{size}</li>
+                  ))
+                }
+              </ul>
+            </div>
           </div>
         </section>
+
+
+
       </main>
     )
   }
