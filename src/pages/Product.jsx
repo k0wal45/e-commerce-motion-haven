@@ -8,6 +8,8 @@ const Product = () => {
 
   const { prodId } = useParams()
   const [listing, setListing] = useState([])
+  const [size, setSize] = useState([])
+  const [quantity, setQuantity] = useState(1)
   const [loading, setLoading] = useState(true)
   const [imageNow, setImageNow] = useState(0)
   const navigate = useNavigate()
@@ -55,17 +57,21 @@ const Product = () => {
       return stars
     }
 
+    if (quantity <= 0) {
+      setQuantity(1)
+    }
+
     
 
     return (
       <main className='w-screen overflow-x-hidden'>
         <section className="flex flex-col lg:flex-row gap-8 py-12 p-4 lg:p-12 justify-center items-center lg:max-w-[66vw] mx-auto">
           <div className="flex flex-col gap-4 items-end min-w-[50%]">
-            <img src={listing.response.images[imageNow]} alt={listing.response.title} className="aspect-square max-h-[60vh] w-min border-2 border-neutral-500" />
+            <img src={listing.response.images[imageNow]} alt={listing.response.title} className=" rounded-md aspect-square max-h-[60vh] w-min border-2 border-neutral-500" />
             <div className="flex gap-4 overflow-x-scroll">
               {
                 listing.response.images.map((img, index) => (
-                  <img src={img} alt={listing.response.title} className={`aspect-square w-24 border-2 border-neutral-500 ${imageNow === index ? '' : 'opacity-50'}`} onClick={() => {setImageNow(index)}}/>
+                  <img src={img} alt={listing.response.title} className={`rounded-md aspect-square w-24 border-2 border-neutral-500 ${imageNow === index ? '' : 'opacity-50'}`} onClick={() => {setImageNow(index)}}/>
                 ))
               }
             </div>
@@ -103,13 +109,28 @@ const Product = () => {
               <p className="text-2xl font-bold">Size</p>
               <ul className="flex gap-4 items-center justify-start">
                 {
-                  listing.response.sizesAvailable.map((size) => (
-                    <li className="p-[4px] px-[8px] border-[1px] border-neutral-400 rounded-md">{size}</li>
+                  listing.response.sizesAvailable.map((e) => (
+                    <li onClick={() => {setSize(e)}} className={`p-[4px] px-[8px] rounded-md cursor-pointer ${size === e ? 'border-2 border-neutral-700' : 'border-[1px] border-neutral-400'}`}>{e}</li>
                   ))
                 }
               </ul>
             </div>
+            <div className="flex flex-col gap-2">
+              <p className="text-2xl font-bold">Quantity</p>
+
+              <div className="join">
+                <button onClick={() => {setQuantity(quantity - 1)}} className="join-item btn text-2xl">-</button>
+                <button className="join-item btn text-2xl">{quantity}</button>
+                <button onClick={() => {setQuantity(quantity + 1)}} className="join-item btn text-2xl">+</button>
+              </div>
+            </div>
+
+            <div className="flex flex-col lg:flex-row gap-8">
+              <button className="p-2 px-8 border-4 border-primary rounded-md text-primary text-2xl font-bold">Add to Cart</button>
+              <button className="p-2 px-8 bg-secondary rounded-md text-white text-2xl font-bold">Buy Now</button>
+            </div>
           </div>
+
         </section>
 
 

@@ -8,14 +8,14 @@ export const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    increment: (state) => {
-      state.value += 1
+    addToCart: (state) => {
+      
     },
 
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { increment } = cartSlice.actions
+export const { addToCart } = cartSlice.actions
 
 export default cartSlice.reducer
