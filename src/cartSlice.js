@@ -23,7 +23,28 @@ export const cartSlice = createSlice({
       for(let i = 0; i < cartItems.length; i++) {
         const currentObject = cartItems[i];
         
-        if (currentObject.id === product.payload.id) {
+        if (currentObject.id === product.payload.id) {   
+
+          console.log(currentObject.id)
+          console.log(cartItems)
+
+          const updatedObject = (array) => {
+            return array.map((obj) => (obj.id === currentObject.id ? { ...obj, quantity: obj.quantity + product.payload.quantity } : obj));
+          }
+
+          const updatedArray = updatedObject(cartItems);
+
+          console.log(updatedArray)
+          localStorage.clear()
+
+          const setItemToLocalStorage = (object) => {
+            const jsonObject = JSON.stringify(object);
+            return jsonObject
+          }
+
+          updatedArray.map((curProd) => (localStorage.setItem(curProd.id, setItemToLocalStorage(curProd))))
+
+          return
           
         }
       }
