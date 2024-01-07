@@ -126,8 +126,8 @@ const Product = () => {
             </div>
 
             <div className="flex flex-col lg:flex-row gap-8">
-              <button className="p-2 px-8 border-4 border-primary rounded-md text-primary text-2xl font-bold">Add to Cart</button>
-              <button className="p-2 px-8 bg-secondary rounded-md text-white text-2xl font-bold">Buy Now</button>
+              <button className="p-2 px-8 border-4 border-primary rounded-md text-primary text-2xl font-bold" onClick={() => {console.log('add to cart')}}>Add to Cart</button>
+              <button className="p-2 px-8 bg-secondary rounded-md text-white text-2xl font-bold" onClick={() => {console.log('buy now')}}>Buy Now</button>
             </div>
           </div>
 
