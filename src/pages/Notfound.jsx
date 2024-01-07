@@ -2,9 +2,9 @@ import React from 'react'
 
 const Notfound = () => {
   return (
-    <div>
+    <main className='w-screen overflow-x-hidden'>
       notfound
-    </div>
+    </main>
   )
 }
 

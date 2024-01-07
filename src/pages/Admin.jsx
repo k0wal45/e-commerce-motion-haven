@@ -2,9 +2,9 @@ import React from 'react'
 
 const Admin = () => {
   return (
-    <div>
+    <main className='w-screen overflow-x-hidden'>
       admin
-    </div>
+    </main>
   )
 }
 

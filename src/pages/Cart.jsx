@@ -1,10 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
 
 const Cart = () => {
+
+  const getCart = useSelector((state) => state.cart.value)
+
+  const [cart, setCart] = useState([])
+
   return (
-    <div>
+    <main className='w-screen overflow-x-hidden'>
       cart
-    </div>
+    </main>
   )
 }
 

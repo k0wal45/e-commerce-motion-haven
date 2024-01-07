@@ -42,8 +42,6 @@ function Home() {
 
   if (!loading) {
 
-    console.log(listings)
-    
     return  (
       <main className='w-screen overflow-x-hidden'>
         <Hero />

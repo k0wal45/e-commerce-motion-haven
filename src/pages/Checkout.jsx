@@ -2,9 +2,9 @@ import React from 'react'
 
 const Checkout = () => {
   return (
-    <div>
+    <main className='w-screen overflow-x-hidden'>
       checkout
-    </div>
+    </main>
   )
 }
 

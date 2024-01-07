@@ -3,8 +3,12 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { db } from '../firebaseConfig'
 import Loading from './Loading'
+import { useDispatch } from 'react-redux'
+import { addToCart } from '../cartSlice'
 
 const Product = () => {
+
+  const dispatch = useDispatch()
 
   const { prodId } = useParams()
   const [listing, setListing] = useState([])
@@ -55,6 +59,7 @@ const Product = () => {
       }
 
       return stars
+
     }
 
     if (quantity <= 0) {
@@ -120,14 +125,22 @@ const Product = () => {
 
               <div className="join">
                 <button onClick={() => {setQuantity(quantity - 1)}} className="join-item btn text-2xl">-</button>
-                <button className="join-item btn text-2xl">{quantity}</button>
+                <p className="join-item btn text-2xl">{quantity}</p>
                 <button onClick={() => {setQuantity(quantity + 1)}} className="join-item btn text-2xl">+</button>
               </div>
             </div>
 
             <div className="flex flex-col lg:flex-row gap-8">
-              <button className="p-2 px-8 border-4 border-primary rounded-md text-primary text-2xl font-bold" onClick={() => {console.log('add to cart')}}>Add to Cart</button>
-              <button className="p-2 px-8 bg-secondary rounded-md text-white text-2xl font-bold" onClick={() => {console.log('buy now')}}>Buy Now</button>
+              <button className="p-2 px-8 border-4 border-primary rounded-md text-primary text-2xl font-bold" 
+                onClick={() => {dispatch(addToCart({
+                  id: listing.id,
+                  response: listing.response,
+                  quantity: quantity,
+                }))}}
+              >Add to Cart</button>
+              <button className="p-2 px-8 bg-secondary rounded-md text-white text-2xl font-bold" 
+                onClick={() => {console.log('buy now')}}
+              >Buy Now</button>
             </div>
           </div>
 

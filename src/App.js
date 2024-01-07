@@ -1,4 +1,5 @@
 import { BrowserRouter as Router,  Routes, Route } from "react-router-dom"; 
+
 import Home from "./pages/Home";
 import Category from "./pages/Category";
 import Cart from "./pages/Cart";
@@ -9,8 +10,16 @@ import Notfound from "./pages/Notfound";
 import Navbar from "./components/navbar/Navbar";
 import Footer from "./components/Footer";
 
+import { useSelector } from "react-redux";
+import { useState } from "react";
+
 
 function App() {
+
+  const getCart = useSelector((state) => state.cart.value)
+
+  const [cart, setCart] = useState(getCart)
+
 
   return (
     <Router>
