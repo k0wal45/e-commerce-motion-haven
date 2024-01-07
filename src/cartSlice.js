@@ -45,7 +45,7 @@ export const cartSlice = createSlice({
           updatedArray.map((curProd) => (localStorage.setItem(curProd.id, setItemToLocalStorage(curProd))))
 
           return
-          
+          // i m gonna cry my slef o sleep with this project i swear
         }
       }
 
