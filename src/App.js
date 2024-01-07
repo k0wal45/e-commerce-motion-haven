@@ -10,15 +10,20 @@ import Notfound from "./pages/Notfound";
 import Navbar from "./components/navbar/Navbar";
 import Footer from "./components/Footer";
 
-import { useSelector } from "react-redux";
-import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getCartItems } from "./cartSlice";
 
 
 function App() {
 
-  const getCart = useSelector((state) => state.cart.value)
+  const dispatch = useDispatch()
 
-  const [cart, setCart] = useState(getCart)
+  useEffect(() => {
+    dispatch(getCartItems())
+  }, [])
+
+  const getCart = useSelector((state) => state.cart.value)
 
 
   return (

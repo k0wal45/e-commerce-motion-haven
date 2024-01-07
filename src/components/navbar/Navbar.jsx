@@ -1,12 +1,22 @@
 import logo from '../../assets/img/logo.webp'
 import './hamburger.css'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
+import { useSelector } from 'react-redux'
 
 
 const Navbar = () => {
+
+  const [cart, setCart] = useState([])
+  const cartItems = useSelector((state) => state.cart.value)
+
+  useEffect(() => {
+    setCart(cartItems.length)
+  }, [cartItems])
+  
+
   const [visible, setVisible] = useState(false)
 
   return (
@@ -37,9 +47,13 @@ const Navbar = () => {
         
       </ul>
 
-      <Link to="/cart" className='hidden lg:flex gap-4 items-center justify-center border-white hover:border-b-2'>
-        <FontAwesomeIcon icon={faCartShopping} className='text-black text-2xl'/>
-      </Link>
+        <Link to="/cart" className='relative hidden lg:flex gap-4 items-center justify-center border-black hover:border-b-2 py-2'>
+          <div className="absolute top-[-15px] right-[-15px] badge badge-secondary">{cart}</div>
+          <FontAwesomeIcon icon={faCartShopping} className='text-black text-2xl'/>
+        </Link>
+
+
+      
 
 
         {/* mobile menu */}
@@ -77,11 +91,14 @@ const Navbar = () => {
           </li>
         </Link>
         
-        <Link to="/cart" className='gap-4 items-center justify-center border-white hover:border-b-2'>
+        <Link to="/cart" className='w-min relative gap-4 items-center justify-center border-black hover:border-b-2 py-2 mx-auto'>
           <li>
+            <div className="absolute top-[-15px] right-[-15px] badge badge-secondary">{cart}</div>
             <FontAwesomeIcon icon={faCartShopping} className='text-black text-2xl'/>
           </li>
         </Link>
+
+        
 
         
         <li>
